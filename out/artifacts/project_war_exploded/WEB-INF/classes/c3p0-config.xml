@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<c3p0-config>
+    <default-config>
+        <property name="driverClass">com.mysql.jdbc.Driver</property>
+        <property name="jdbcUrl">jdbc:mysql://localhost:3306/msgdb</property>
+        <property name="user">root</property>
+        <property name="password">123456</property>
+        <property name="initialPoolSize">10</property><!--默认连接池中放10个连接对象-->
+        <property name="maxIdleTime">30</property><!--当一个连接对象30秒没有做任何操作,那么会回收这个连接-->
+        <property name="maxPoolSize">100</property><!--连接池最多支持多少个连接对象-->
+        <property name="minPoolSize">10</property><!--最少支持多少个连接对象-->
+        <property name="acquireIncrement">5</property><!--不够的情况下,新开辟几个连接对象放连接池中-->
+
+    </default-config>
+
+</c3p0-config>
