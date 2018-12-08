@@ -39,8 +39,12 @@ public class UserServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath()+"/index.jsp");//回到登录页面
         }else if(param.equals("queryallusers")){
             List<User> uList = us.getAllUsers();
+            String sendid = req.getParameter("sendid");
+            if(sendid != null) {
+                req.setAttribute("sendid", sendid);
+            }
             req.setAttribute("users", uList);
-            req.getRequestDispatcher("/newMsg.jsp").forward(req, resp);
+            req.getRequestDispatcher("/view/newMsg.jsp").forward(req, resp);
         }else if(param.equals("doRegister")){
             String name = req.getParameter("name");
             String pwd = req.getParameter("pwd");

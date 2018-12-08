@@ -18,7 +18,13 @@
 						<ul class="clearfix">
 							<li>发送给： <select name="toUser">
 								<c:forEach items="${users }" var="user">
-									<option selected="selected" value="${user.id }">${user.name }</option>
+									<c:if test="${requestScope.sendid ==user.id}">
+										<option selected="selected" value="${user.id }">${user.name }</option>
+									</c:if>
+
+									<c:if test="${requestScope.sendid !=user.id}">
+										<option  value="${user.id }">${user.name }</option>
+									</c:if>
 								</c:forEach>
 							</select>
 							</li>

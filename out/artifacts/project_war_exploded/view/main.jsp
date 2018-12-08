@@ -17,7 +17,6 @@
 	<script type="text/javascript">
 
         $(function() {
-            console.log('执行了===')
             showMessages(1, 3);//显示第一页三条数据
         })
         function del(id) {
@@ -60,7 +59,7 @@
                     }
 
                     var $em1=$("<em>"+data.msgList[i].msg_create_date+"</em>");
-                    var $em2=$("<em><a href='#'>回信</a></em>");
+                    var $em2=$("<em><a href='/user.do?param=queryallusers&sendid="+ data.msgList[i].sendid +"'>回信</a></em>");
                     var $em3=$("<em><a href='javascript:del("+data.msgList[i].id+")'>删除</a></em>");
                     var $p=$("<p></p>");
                     var $strong=$("<storng>"+data.msgList[i].title+"</strong>");
