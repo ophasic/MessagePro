@@ -42,7 +42,7 @@ public class MessageServlet extends HttpServlet {
             String id = req.getParameter("id");
             Message msg = msgService.queryMessageById(id);
             req.setAttribute("msg", msg);
-            req.getRequestDispatcher("/readMsg.jsp").forward(req, resp);
+            req.getRequestDispatcher("/view/readMsg.jsp").forward(req, resp);
         } else if(param.equals("send")) {
             User user = (User)req.getSession(false).getAttribute("user");
             int sendid = user.getId();

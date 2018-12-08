@@ -66,7 +66,7 @@
                     var $strong=$("<storng>"+data.msgList[i].title+"</strong>");
                     var $a="";
                     if(data.msgList[i].msgcontent.length>8){
-                        $a=$("<a href='/msg.do?param=showmsgbyid&id="+data.msgList[i].id+"'>"+data.msgList[i].msgcontent.substring(0,8)+"</a>");
+                        $a=$("<a href='/msg.do?param=showmsgbyid&id="+data.msgList[i].id+"'>"+data.msgList[i].msgcontent.substring(0,8)+"...</a>");
                     }else{
                         $a=$("<a href='/msg.do?param=showmsgbyid&id="+data.msgList[i].id+"'>"+data.msgList[i].msgcontent+"</a>");
                     }
