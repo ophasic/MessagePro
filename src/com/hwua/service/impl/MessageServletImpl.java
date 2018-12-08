@@ -19,10 +19,10 @@ public class MessageServletImpl implements IMessageService {
      * 查询登录用户收到的所有短消息
      */
     @Override
-    public List<Message> queryMessageByLoginUser(int loginid) {
+    public List<Message> queryMessageByLoginUser(int loginid, int start, int pageSize) {
         List<Message> msgList = null;
         try {
-            msgList = msgDao.query(loginid);
+            msgList = msgDao.query(loginid, start, pageSize);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -62,5 +62,17 @@ public class MessageServletImpl implements IMessageService {
             e.printStackTrace();
         }
         return res;
+    }
+
+    @Override
+    public Long queryMsgCount(int loginid) {
+        Long count = 0l;
+        try {
+            count=msgDao.queryCount(loginid);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return count;
     }
 }

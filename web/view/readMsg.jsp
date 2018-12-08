@@ -4,7 +4,7 @@
 <html>
 <head>
 <title>读短消息</title>
-<link type="text/css" rel="stylesheet" href="css/sms.css" />
+<link type="text/css" rel="stylesheet" href="../css/sms.css" />
 
 </head>
 <body>

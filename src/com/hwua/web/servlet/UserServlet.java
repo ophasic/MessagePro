@@ -29,7 +29,7 @@ public class UserServlet extends HttpServlet {
             user = us.login(user);
             if (user != null) {
                 req.getSession().setAttribute("user", user);
-                resp.sendRedirect(req.getContextPath() + "/msg.do?param=querybyloginid");
+                resp.sendRedirect(req.getContextPath() + "/view/main.jsp");
             } else {
                 req.getSession().setAttribute("info", "用户名或密码出错");
                 resp.sendRedirect(req.getContextPath() + "/index.jsp");

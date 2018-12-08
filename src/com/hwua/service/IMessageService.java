@@ -7,8 +7,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface IMessageService {
-    public List<Message> queryMessageByLoginUser(int loginid);
+    public List<Message> queryMessageByLoginUser(int loginid, int start, int pageSize);
     public Message queryMessageById(String id);
     public int sendMessage(Message msg);
     public int deleteMsgById(int id);
+    public Long queryMsgCount(int loginid);
 }

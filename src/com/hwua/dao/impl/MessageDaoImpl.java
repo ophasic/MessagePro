@@ -6,15 +6,16 @@ import com.hwua.util.C3P0Utils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class MessageDaoImpl implements IMessageDao {
     @Override
-    public List<Message> query(int receiveid) throws SQLException {
-        String sql = "select id,sendid,title,msgcontent,state,receiveid,msg_create_date from messages where receiveid=? order by msg_create_date desc";
-        Object[] params = { receiveid };
+    public List<Message> query(int receiveid, int start, int pageSize) throws SQLException {
+        String sql = "select id,sendid,title,msgcontent,state,receiveid,msg_create_date from messages where receiveid=? order by msg_create_date desc limit ?, ?";
+        Object[] params = { receiveid, start, pageSize };
         QueryRunner qr = new QueryRunner(C3P0Utils.getCpds());
         return qr.query(sql, new BeanListHandler<>(Message.class), params);
     }
@@ -49,5 +50,13 @@ public class MessageDaoImpl implements IMessageDao {
         Object [] params={id};
         QueryRunner qr = new QueryRunner(C3P0Utils.getCpds());
         return qr.update(sql, params);
+    }
+
+    @Override
+    public Long queryCount(int receiveid) throws SQLException {
+        String sql = "select count(*) from messages where receiveid = ?";
+        Object [] params = {receiveid};
+        QueryRunner qr = new QueryRunner(C3P0Utils.getCpds());
+        return (Long) qr.query(sql, new ScalarHandler(), params);
     }
 }

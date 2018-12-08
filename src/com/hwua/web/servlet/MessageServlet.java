@@ -1,6 +1,8 @@
 package com.hwua.web.servlet;
 
+import com.alibaba.fastjson.JSON;
 import com.hwua.entity.Message;
+import com.hwua.entity.PageEntity;
 import com.hwua.entity.User;
 import com.hwua.service.impl.MessageServletImpl;
 import com.hwua.util.StringUtil;
@@ -22,10 +24,20 @@ public class MessageServlet extends HttpServlet {
         MessageServletImpl msgService = new MessageServletImpl();
         if(param.equals("querybyloginid")) {
             User user =(User)req.getSession(false).getAttribute("user");
-            List<Message> messages = msgService.queryMessageByLoginUser(user.getId());
-            //把业务层返回的数据放到作用域中,并转发给页面进行显示
-            req.setAttribute("msgList", messages);
-            req.getRequestDispatcher("/main.jsp").forward(req, resp);
+
+            PageEntity pageEntity = new PageEntity();
+            int pageNo = Integer.parseInt(req.getParameter("pageNo"));
+            int pageSize = Integer.parseInt(req.getParameter("pageSize"));
+            Long totalRecords = msgService.queryMsgCount(user.getId());
+            pageEntity.setPageNo(pageNo);
+            pageEntity.setPageSize(pageSize);
+            pageEntity.setTotalRecords(totalRecords);
+
+            List<Message> messages = msgService.queryMessageByLoginUser(user.getId(), (pageNo - 1) * pageSize, pageSize);
+            pageEntity.setMsgList(messages);
+            resp.setContentType("application/json;charset=utf-8");
+            String json = JSON.toJSONString(pageEntity, true);
+            resp.getWriter().write(json);
         } else if(param.equals("showmsgbyid")) {
             String id = req.getParameter("id");
             Message msg = msgService.queryMessageById(id);

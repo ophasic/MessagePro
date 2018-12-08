@@ -5,7 +5,7 @@
 <html>
 <head>
 	<title>海文 在线短信平台</title>
-	<link type="text/css" rel="stylesheet" href="css/sms.css" />
+	<link type="text/css" rel="stylesheet" href="../css/sms.css" />
 </head>
 <body>
 <form action="${pageContext.request.contextPath}/msg.do?param=send" method="post">
