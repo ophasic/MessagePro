@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -59,9 +60,14 @@ public class MessageServlet extends HttpServlet {
         }else if(param.equals("delete")){
             String id = req.getParameter("id");
             int res=msgService.deleteMsgById(Integer.parseInt(id));
+            resp.setContentType("text/html;charset=uft-8");
+            PrintWriter out = resp.getWriter();
             if(res>0){
-                resp.sendRedirect(req.getContextPath() + "/msg.do?param=querybyloginid");
+                out.write("success");
+            } else {
+                out.write("failture");
             }
+            out.close();
         }
     }
 
